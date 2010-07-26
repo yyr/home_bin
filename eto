@@ -1,0 +1,5 @@
+#!/usr/bin/expect
+spawn ssh -Y yagnesh@etorof.porc.lowtem.hokudai.ac.jp
+expect "yagnesh@yuzhno.porc.lowtem.hokudai.ac.jp's password:"
+send "njuhvftg\r"
+interact

@@ -1,0 +1,42 @@
+#!/bin/bash 
+#
+#this is practice of course project
+#this cheks for files which are containg foo with it
+#
+
+#taking the given pattern to a variable
+gipatt=$1
+# testing the for no matches
+ls *$gipatt* | wc -l | read nom
+
+if [ $gipatt = 0 ]
+then 
+    echo " there is <""$gipatt"">matching patterns"
+    exit
+  else
+    echo no of files/dir  matches with <""$gipatt"">$nom"
+fi
+
+#counting the size occupation
+size=0
+i=0
+for fname in *$gipatt*
+do
+  du -sk $fname | read add list[${i}]
+  size=`expr ${size} + ${add}`
+  i=`expr ${i} + 1`
+done
+
+#echoing the sum of sizes of the all files
+echo -e "the total size of the files matching with given pattern: $size "
+
+
+#counting the no of files get passed trough above loop
+listleng=${list}
+
+# echoing to the terminal those file names matched
+echo "the files that are matching with $gipatt"
+
+for ((i=0;i<$listleng+1;i++)); do
+    echo ${list[${i}]}
+done

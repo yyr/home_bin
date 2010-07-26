@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#this is for testing the signal trap
+#here only sleep
+#
+#
+
+trap "date ; time" 1 2 15
+
+echo "i am going to sleep for 60 sec"
+sleep 60
+echo i slept for 60 sec
+
+
+
+
+

@@ -1,0 +1,5 @@
+#!/usr/bin/expect
+spawn ssh  webvanitha@www.webvanitha.com	
+expect "webvanitha@www.webvanitha.com's password:"
+send "SaDhana9\r"
+interact

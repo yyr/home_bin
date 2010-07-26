@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+#this code to check the stuff in the current directory
+#means it takes all the stuff in the dir and tells 
+#whether it is directory or only file and checks the writing 
+#attribute also
+#
+
+#taking the input files into stuname variable with ls command
+ls | while read stuname
+  do
+    if [ -d $stuname ]  #checking for directory
+      then
+#checks  W attributes
+	[ -w $stuname ] && echo "$stuname is a directory with writing attributes" 
+	[ ! -w $stuname ] && echo "$stuname is a directory with out writing attributes"
+    elif [ -f $stuname ] # checking for a file
+      then
+#checks  W attributes
+	[ -w $stuname ] && echo "$stuname is a file  with writing attributes"
+	[ ! -w $stuname ] && echo "$stuname is a file with out writing attributes"	 
+    else
+	echo "$stuname is neither a file nor directory"
+    fi
+  done
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+#this is just test the pause function
+#
+
+. lpause
+
+pause 
+echo "paus working well"
