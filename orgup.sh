@@ -12,8 +12,11 @@
 cd ~/git/org-mode/
 
 make clean &&
-git pull && make clean && make && make doc &&
-make install && make clean
+git pull &&
+make clean > /dev/null && 
+make > /dev/null &&
+make doc /dev/null &&
+sudo make install
 
 if [  $? == 0 ]; then
     echo "****************************************"
