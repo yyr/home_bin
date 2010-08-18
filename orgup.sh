@@ -8,15 +8,19 @@
 # Latest change by on 2010-07-22 14:45
 #..............................................................................!
 
-# run as sudo
-cd ~/git/org-mode/
+ORGDIR="$HOME/git/org-mode"
+INFODIR="$HOME/git/info/"
+MAKEINFO="makeinfo"
 
-make clean &&
-git pull &&
+cd $ORGDIR
+git pull && make clean && make && make doc && sudo make install
+
+# make clean &&
+# git pull &&
+# make > /dev/null &&
+# make doc /dev/null &&
+# sudo make install
 make clean > /dev/null && 
-make > /dev/null &&
-make doc /dev/null &&
-sudo make install
 
 if [  $? == 0 ]; then
     echo "****************************************"
@@ -28,3 +32,7 @@ else
     echo "****************************************"
     exit 2
 fi
+
+cd doc/
+$MAKEINFO --output="$INFODIR/org.info" org.texi && echo "org.info is in $INFODIR"
+
