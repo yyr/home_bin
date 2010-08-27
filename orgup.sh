@@ -13,7 +13,7 @@ INFODIR="$HOME/git/info/"
 MAKEINFO="makeinfo"
 
 cd $ORGDIR
-git pull && make clean && make && make doc && sudo make install
+git pull && make clean && make && make doc && make install
 
 # make clean &&
 # git pull &&
