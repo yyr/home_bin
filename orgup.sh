@@ -9,7 +9,7 @@
 #..............................................................................!
 
 ORGDIR="$HOME/git/org-mode"
-INFODIR="$HOME/git/info/"
+INFODIR="$HOME/git/info"
 MAKEINFO="makeinfo"
 
 cd $ORGDIR
