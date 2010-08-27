@@ -1,0 +1,1 @@
+/home/yagnesh/lib/emacs-bzr/bin/emacs
