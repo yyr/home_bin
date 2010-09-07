@@ -1,4 +1,4 @@
-    #!/usr/bin/perl
+#!/usr/bin/perl
 #    =**************************************
 #    = Name: BASH History Cleaner
 #    = Description:This will scan your ~/.bas
@@ -12,15 +12,15 @@
 #    = By: Ryan F
 #    =
 #    = Assumes:Adapt the code to your use bef
-#    =     ore you run it. Default will NOT make a 
+#    =     ore you run it. Default will NOT make a
 #    =     backup of the file. It works on my PC, I
-#    =     make no guarantees that it will work on 
+#    =     make no guarantees that it will work on
 #    =     yours.
 #    =
 #    =This code is copyrighted and has    = limited warranties.Please see http://w
 #    =     ww.Planet-Source-Code.com/vb/scripts/Sho
 #    =     wCode.asp?txtCodeId=640&lngWId=6    =for details.    =**************************************
-#    
+#
 
     # This script cleans your ~/.bash_history of certain commands
     # I use this mainly to remove sudo references
@@ -48,7 +48,7 @@
     {
     # Get date- does anyone know how to do this without a tmp variable?
     ($tmp,$tmp,$tmp,$mday,$mon,$yr,$tmp,$tmp,$tmp)= localtime(time);
-    
+
     $theDate= sprintf("%02d%2d%4d",$mon+1,$mday,$yr+1900); # $theDate;
     system("cp",$HistFile, "$Home/.bash_hist-bak$theDate");
     };

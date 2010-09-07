@@ -1,7 +1,0 @@
-#!/bin/bash -x
-#this is check the command line functionality
-
-a=one; echo $a
-a=two  echo $a
-a=three echo $a > $a
-
