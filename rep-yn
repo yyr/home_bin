@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# -*- mode: shell-script; -*-
+#---------------------------------------------------------------------------
+# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
+# DATE: 2010-09-09
+# Purpose: repeat the command on <ENTER>
+# 
+# Current Version: 0.1
+# Latest change by on 2010-09-09 01:35
+#---------------------------------------------------------------------------
+
+#function repeat_yn () # IMPROVEME
+#{
+    while [[ true ]]; do
+
+	eval "$@";
+	echo ;
+	echo "**** press <ENTER> to repeat or <ctrl + c> to exit ***";
+	read junk;
+	
+    done
+#}
