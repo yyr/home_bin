@@ -1,28 +1,15 @@
-#!/bin/sh
+#!/bin/bash
+#---------------------------------------------------------------------------
+# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
+# DATE: 2010-09-11
+# Purpose: this removes all spaces from filenames contained in a folder
+# 
+# Current Version: 0.1
+# Latest change by YYR on 2010-09-11 00:36
+#---------------------------------------------------------------------------
 
-# ******************************************************************************|
-#  Author: Yagnesh raghava  Yakkala                                             |
-#  DATE:
-#  Purpose:
-
-#                                                                               |
-#  Current Version:
-#  Latest change by on 
-# ..............................................................................!
-
-
-
-
-# 	if ask "*************WARNING****************** \
-# This program effects all the subfolders as well  \
-# Do you want to continue  " 
-    if ask this affects subfolders as well. continue? 
-	then
-	    continue 
-	fi
-
-	find . -name "* *"|while read file
-	do
-	    target=`echo "$file"|tr -s ' ' '_'`
-	    mv "$file" "$target"
-	done
+find . -maxdepth 1|while read file
+do
+    target=`echo "$file"|tr -s ' ' '_'`
+    mv "$file" "$target"
+done
