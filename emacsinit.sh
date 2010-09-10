@@ -1,5 +1,5 @@
-;;; see page http://www.emacswiki.org/emacs/emacsd for discussion and usage
 #!/bin/sh
+#;;; see page http://www.emacswiki.org/emacs/emacsd for discussion and usage
 
 ### BEGIN INIT INFO
 # Provides: emacsd
@@ -28,10 +28,10 @@ EE_EMACS_FAIL_TO_STOP=4
 # Real code begins here
 
 if [ -z `which emacs` ]
-    then
-        log_daemon_msg "Error: Emacs not found. emacsd will now exit."
-	    exit $EE_EMACS_NOT_FOUND
-	    fi
+then
+    log_daemon_msg "Error: Emacs not found. emacsd will now exit."
+    exit $EE_EMACS_NOT_FOUND
+fi
 
 # TODO Start emacs as normal user "emacsd" or "daemon"
 #emacs run under this uid
@@ -39,60 +39,60 @@ emacsd_uid="1000"
 socket_file="/tmp/emacs${emacsd_uid}/server"
 
 if [ "$1" = "start" ]
-    then
+then
         #check whether already started
-        if [ -e "$socket_file" ]
-	        then
-	            echo "Error: emacsd already started."
-		            exit $EE_EMACSD_ALREADY_STARTED
-			        fi
+    if [ -e "$socket_file" ]
+    then
+	echo "Error: emacsd already started."
+	exit $EE_EMACSD_ALREADY_STARTED
+    fi
 
-	    echo "Start emacs daemon ..."
-	        sudo -u"#"$emacsd_uid $emacs --daemon
+    echo "Start emacs daemon ..."
+    sudo -u"#"$emacsd_uid $emacs --daemon
 
-		    if [ "$?" -eq 0 ]
-			    then
-			        echo "emacsd is up."
-				        exit 0
-					    else
-			        echo "Error: emacsd failed to start."
-				        exit $EE_EMACS_FAIL_TO_START
-					    fi
-		    fi
+    if [ "$?" -eq 0 ]
+    then
+	echo "emacsd is up."
+	exit 0
+    else
+	echo "Error: emacsd failed to start."
+	exit $EE_EMACS_FAIL_TO_START
+    fi
+fi
 
 if [ "$1" = "stop" ]
-    then
+then
         #options="-s $socket_file"
-        options=""
-	    lispcode="(kill-emacs)"
-	        sudo -u"#"$emacsd_uid $emacsclient $options --eval $lispcode
+    options=""
+    lispcode="(kill-emacs)"
+    sudo -u"#"$emacsd_uid $emacsclient $options --eval $lispcode
 
-		    if [ "$?" -eq 0 ]
-			    then
-			        echo "emacsd is down."
-				        exit 0
-					    else
-			        echo "Error: emacsd failed to stop."
-				        exit $EE_EMACS_FAIL_TO_STOP
-					    fi
-		        exit 0
-			fi
+    if [ "$?" -eq 0 ]
+    then
+	echo "emacsd is down."
+	exit 0
+    else
+	echo "Error: emacsd failed to stop."
+	exit $EE_EMACS_FAIL_TO_STOP
+    fi
+    exit 0
+fi
 
 if [ "$1" = "restart" ] || [ "$1" = "force-reload" ]
+then
+    if [ -e "$socket_file" ]
     then
-        if [ -e "$socket_file" ]
-	        then
-	            $0 stop
-		        fi
-	    $0 start
-	    fi
+	$0 stop
+    fi
+    $0 start
+fi
 
 echo "Usage: /etc/init.d/emacsd {start|stop|restart|force-reload}"
 if ! [ -z "$1" ]
-    then
-        echo "No such option:" $*
-	    exit $EE_INVALID_OPTION
-	    fi
+then
+    echo "No such option:" $*
+    exit $EE_INVALID_OPTION
+fi
 
 exit 0
 
