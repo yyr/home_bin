@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#---------------------------------------------------------------------------
+# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
+# DATE: 2010-09-10
+# Purpose: echo & set system ip and isp 
+#
+# 
+# Current Version: 0.1
+# Latest change by on 
+#---------------------------------------------------------------------------
+
+#function my_ip() # Get IP adresses.
+#{
+    MY_IP=$(/sbin/ifconfig eth0 | awk '/inet/ { print $2 } ' | \
+sed -e s/addr://)
+    echo "your IP  :"${MY_IP:-"Not able to get your ip"} 
+    MY_ISP=$(/sbin/ifconfig eth0 | awk '/P-t-P/ { print $3 } ' | \
+sed -e s/P-t-P://)
+    echo "your ISP :"${MY_ISP:-"Not able to get your ISP details"} 
+    echo "MY_IP and MY_ISP variable are set NOW"
+#}
