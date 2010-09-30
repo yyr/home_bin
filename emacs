@@ -1,1 +1,1 @@
-/home/yagnesh/lib/emacs-bzr/bin/emacs
+/home/yagnesh/local/emacs-git/bin/emacs
