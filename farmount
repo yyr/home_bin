@@ -1,0 +1,41 @@
+#!/usr/bin/env bash 
+# -*- mode: shell-script; -*-
+#---------------------------------------------------------------------------
+# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
+# DATE: 2010-09-17
+# Purpose: mount remote folder locally(~/far_projects) using sshfs, this is like alias alomst
+# 
+# Current Version: 0.1
+# Latest change by on 2010-09-17 12:03
+#---------------------------------------------------------------------------
+
+function usage() {     # let the user know how to use this
+    echo USAGE: "$1 <$USER@remote:/projects>"
+}
+
+# function ask()          # for conformation from user interactively
+# {
+#     echo -n "$@" '[y/n] ' ; read ans
+#     case "$ans" in
+#         y*|Y*) return 0 ;;
+#         *) return 1 ;;
+#     esac
+# }
+
+ARGCOUNT=1
+E_ARGCOUNT=65
+
+if [ $# -ne $ARGCOUNT ]
+then
+    echo "${#} arguments."
+    usage $0
+    exit $E_ARGCOUNT
+fi
+
+function fmount ()
+{
+    sshfs -o idmap=user ${1} ~/far_projects
+}
+
+
+fmount ${1}
