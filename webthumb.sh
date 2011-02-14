@@ -33,12 +33,5 @@ for fullpath in "$@" ; do
 cd ${dir:-.}
 pwd
 
-if [ -f ${base}.${ext} ]; then
-    echo "creating Thumbnail for ${filename}"
-    convert -thumbnail 250 ${base}.${ext}  ${base}.thumb.${ext}
-    echo " created ${base}.thumb.${ext}"
-else
-    echo "'$1' is not a valid file"    
-fi
 
 done
