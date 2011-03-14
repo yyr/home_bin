@@ -14,13 +14,14 @@ my packs = {
 	    texlive-base,
 	    texlive-latex-extra,
 	    texi2html,
+	    markdown,
 	    git,
 	    gitk,
 	    subversion,
 	    build-essential,
 	    autoconf,
+	    curl,
+	    gsl,
 	   };
-
 sub function_name {
-  
 }
