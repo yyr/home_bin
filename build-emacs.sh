@@ -15,11 +15,21 @@ function check_error() {
     
 }
 
+function announce() {
+    echo "
+ ###################################################
+ # Now Running:  $1
+ ###################################################
+
+"
+}
+
 function run_autogen() {	# run autogen.sh
+    announce "autogen.sh"
     if [ $Hostname == "amur" ]; then
 	autoreconf -I m4
     else
-	./autogen.sh > autogen.log 2> autogen.log &
+	./autogen.sh &> autogen.log 
     fi
     check_error "autogen"
 }
@@ -36,14 +46,16 @@ function get_flags() {		# any flags (changes from system to system)
 }
 
 function run_configure() {
-    ./configure --prefix=$install_dir $conf_flags
+    announce './configure'
+    ./configure --prefix=$install_dir $conf_flags &> conf.log
     check_error "configure"
 
 }
 
 function run_make() {
-    $Make clean
-    $Make $Bootstrap
+    $Make clean &> /dev/null
+    announce 'make bootstrap'
+    $Make $Bootstrap &> bootstrap.log
     check_error "Make"
 }
 
@@ -57,23 +69,23 @@ function back_up() {
 }
 
 function make_install() {
-    $make install
+    $make install &> install.log
+    check_error "installation"
 }
 
 
+#--------------------------------------------------------------
+# code starts here
 repo_dir=~/git/repos/emacs
 Uname=`whoami`
 install_dir=/home/$Uname/local/emacs-git
 backup_dir=/home/$Uname/local/emacs-backup
 
-
 cd $repo_dir
-
 
 Hostname=`hostname`
 Make=make
 Bootstrap=bootstrap
-
 
 run_autogen
 get_flags
@@ -81,6 +93,5 @@ run_configure
 run_make
 back_up
 make_install
-
 
 # buildemacs.sh ends here
