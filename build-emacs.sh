@@ -60,6 +60,7 @@ function run_make() {
 }
 
 function back_up() {
+    announce 'backup'
     if [ -d $install_dir ]; then
 	if [ -d $backup_dir ]; then
 	    rm -r $backup_dir
@@ -69,7 +70,8 @@ function back_up() {
 }
 
 function make_install() {
-    $make install &> install.log
+    announce 'make install'
+    $Make install &> install.log
     check_error "installation"
 }
 
