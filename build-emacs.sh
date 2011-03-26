@@ -61,7 +61,7 @@ function run_make() {
 
 function back_up() {
     if [ -d $install_dir ]; then
-	if [ -d $backup_dir]; then
+	if [ -d $backup_dir ]; then
 	    rm -r $backup_dir
 	fi
 	mv $install_dir  ${backup_dir}
