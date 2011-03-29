@@ -55,6 +55,7 @@ function is_git_availble() {          # Checks for git excutables
 
 
 function git_update () {
+    announce "running git update"
     is_git_availble
     if [ $? == $No_git_error ]; then
         error_convay "$No_git_error; Seems \"git \" is not available; will procede with out git update"
@@ -69,7 +70,7 @@ function git_update () {
 function run_autogen() {        # run autogen.sh
     announce "running autogen.sh"
     if [ $Hostname == "amur" ]; then
-        autoreconf -I m4
+	./autogen/copy_autogen
     else
         ./autogen.sh &> autogen.log
     fi
