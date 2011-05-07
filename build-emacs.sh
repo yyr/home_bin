@@ -70,7 +70,7 @@ function git_update () {
 function run_autogen() {        # run autogen.sh
     announce "running autogen.sh"
     if [ $Hostname == "amur" ]; then
-	./autogen/copy_autogen
+        ./autogen/copy_autogen
     else
         ./autogen.sh &> autogen.log
     fi
@@ -98,8 +98,8 @@ function run_configure() {
 function run_make() {
     # $Make clean &> /dev/null
     announce 'Running: make bootstrap'
-    # $Make $Bootstrap &> bootstrap.log
-    $Make &> make.log
+    $Make $Bootstrap &> bootstrap.log
+    # $Make &> make.log
     check_error "Make"
 }
 
@@ -114,7 +114,7 @@ function back_up() {
 }
 
 
-	function make_install() {
+function make_install() {
     announce 'Runnig: make install'
     $Make install &> install.log
     check_error "installation"
@@ -141,12 +141,12 @@ Hostname=`hostname`
 Make=make
 Bootstrap=bootstrap
 
-git_update			# pull from repo
-# run_autogen			# run the autogen to prepare configure script
-# get_flags			# look for any flags
-# run_configure			# runn the configure script
-run_make			# make (make bootstrap)
-back_up				# backup old installation if any and remove old backups
-make_install			# install to the specified directory
+git_update                      # pull from repo
+run_autogen                     # run the autogen to prepare configure script
+get_flags                       # look for any flags
+run_configure                   # runn the configure script
+run_make                        # make (make bootstrap)
+back_up                         # backup old installation if any and remove old backups
+make_install                    # install to the specified directory
 
 # buildemacs.sh ends here
