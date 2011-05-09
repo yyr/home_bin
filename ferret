@@ -1,0 +1,8 @@
+#!/bin/tcsh 
+
+# 5.53 for rh71
+source ~/local/ferret_paths
+
+# Faddpath $HOME/ferret/gridlines
+
+exec /home/yagnesh/local/ferret/bin/ferret $*
