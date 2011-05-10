@@ -80,7 +80,7 @@ function run_autogen() {        # run autogen.sh
 function get_flags() {          # any flags (changes from system to system)
     case $Hostname in
         amur )
-            conf_flags=' --with-jpeg=no --with-gif=no --with-tiff=no'
+            conf_flags=' --with-jpeg=no --with-gif=no --with-tiff=no --without-gnutls'
             ;;
         * )
             conf_flags=""
@@ -132,7 +132,6 @@ repo_dir=~/git/repos/emacs
 Uname=`whoami`
 install_dir=/home/$Uname/local/emacs-git
 backup_dir=/home/$Uname/local/emacs-backup
-
 
 
 cd $repo_dir
