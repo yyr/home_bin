@@ -29,8 +29,10 @@ function make_dir () {
 
 function download_src() {
     for file in $@ ; do
-        wget $ftp_url/$file
-	wget $ftp_url_data/$file
+        if [ ! -f $file ]; then
+            wget $ftp_url/$file
+            wget $ftp_url_data/$file
+        fi
     done
 }
 
