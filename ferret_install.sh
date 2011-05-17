@@ -49,6 +49,12 @@ cd $Fdata_dir
 tar xzf $src_dir/$src_data
 
 # install ferret
+# some paths
+export FER_DIR=$install
+export FER_DSETS=$Fdata_dir
+export ferexec_dir=$src_dir
+export SHELL=/bin/bash
+
 $install_dir/bin/Finstall
 
 # ferret_install.sh ends here
