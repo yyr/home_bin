@@ -98,8 +98,8 @@ function run_configure() {
 function run_make() {
     # $Make clean &> /dev/null
     announce 'Running: make bootstrap'
-    $Make $Bootstrap &> bootstrap.log
-    # $Make &> make.log
+    # $Make $Bootstrap &> bootstrap.log
+    $Make &> make.log
     check_error "Make"
 }
 
