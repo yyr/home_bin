@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Copyright (C) Yagnesh Raghava Yakkala. www.yagnesh.org
+#    File: build-python.sh
+#  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
+# Created: Friday, June 24 2011
+# Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
+#
+
+# Description:
+#
+#--------------User modifications------------------
+installdir="/home/$(whoami)/local/python"
+srcdir=~/src
+py_ver=3.2
+
+py_dir="Python-$py_ver"
+source_tar="Python-$py_ver.tgz"
+down_url="http://www.python.org/ftp/python/$py_ver/$source_tar"
+
+function build_dep () {
+    sudo apt-get install build-essential libncursesw5-dev \
+        libreadline5-dev libssl-dev libgdbm-dev libc6-dev libsqlite3-dev tk-dev
+}
+
+function build() {
+    ./configure --prefix=$installdir
+    make
+    make altinstall
+}
+
+function wget_down() {
+    wget $down_url
+    if [ $? != 0 ]; then
+        return 0
+    else
+        return 24
+    fi
+}
+
+# ------------------------------
+cd $srcdir;
+# build_dep
+# wget_down
+# extract $source_tar           # extract is bash function to extract the any compressed file
+
+
+echo $srcdir/$py_dir
+cd $srcdir/$py_dir
+echo building: $py_ver
+pwd
+build
+
+
+
+# build-python.sh ends here
