@@ -29,8 +29,10 @@ function make_dir () {
 
 function download_src() {
     for file in $@ ; do
-        wget $ftp_url/$file
-	wget $ftp_url_data/$file
+        if [ ! -f $file ]; then
+            wget $ftp_url/$file
+            wget $ftp_url_data/$file
+        fi
     done
 }
 
@@ -47,6 +49,12 @@ cd $Fdata_dir
 tar xzf $src_dir/$src_data
 
 # install ferret
+# some paths
+export FER_DIR=$install
+export FER_DSETS=$Fdata_dir
+export ferexec_dir=$src_dir
+export SHELL=/bin/bash
+
 $install_dir/bin/Finstall
 
 # ferret_install.sh ends here

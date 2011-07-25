@@ -4,8 +4,10 @@
 #    File: buildemacs.sh
 #  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
 # Created: Tuesday, March 22 2011
+# Licence: Gpl v3 or later
 #
 # Description:
+# build emacs with latest checkout
 
 function check_error() {
     if [[ $? != 0 ]] ; then
@@ -98,12 +100,12 @@ function run_configure() {
 function run_make() {
     # $Make clean &> /dev/null
     announce 'Running: make bootstrap'
-    $Make $Bootstrap &> bootstrap.log
-    # $Make &> make.log
+    # $Make $Bootstrap &> bootstrap.log
+    $Make &> make.log
     check_error "Make"
 }
 
-function back_up() {
+function back_up() {		# backup old installations
     announce 'Running: backup'
     if [ -d $install_dir ]; then
         if [ -d $backup_dir ]; then
@@ -127,14 +129,29 @@ function make_install() {
 #Error returns
 No_git_error=61
 
+git_repo_dir=~/git/repos/emacs
+hg_repo_dir=~/git/repos/emacs-hg/
 
-repo_dir=~/git/repos/emacs
+repo_dir=$git_repo_dir # choose which repo dir to choose
+
+case $1 in
+    git)
+        repo_dir=$git_repo_dir
+        ;;
+    hg)
+        repo_dir=$hg_repo_dir
+        ;;
+    *)
+        repo_dir=$git_repo_dir
+        ;;
+esac
+
 Uname=`whoami`
 install_dir=/home/$Uname/local/emacs-git
 backup_dir=/home/$Uname/local/emacs-backup
 
-
 cd $repo_dir
+echo "cd to $(pwd)"
 
 Hostname=`hostname`
 Make=make
