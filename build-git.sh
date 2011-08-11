@@ -12,9 +12,9 @@ repo_dir=/home/yagnesh/git/repos/git
 
 cd $repo_dir
 sudo apt-get build-dep git-core git-doc
-./configure --prefix=/home/yagnesh/local/git --with-curl=/usr/bin/curl EXPATDIR=/usr/
+./configure --prefix=/home/yagnesh/local/git --with-curl=/usr EXPATDIR=/usr 2>&1  | tee log.configure
 
-make all doc # remove doc for less dependencies
+make all doc 2>&1 | tee log.make  # remove doc for less dependencies
 make install install-doc install-html
 
 # build-git.sh ends here

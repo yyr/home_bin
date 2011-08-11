@@ -9,8 +9,8 @@
 # Latest change by on 2010-09-09 01:35
 #---------------------------------------------------------------------------
 
-#function repeat_yn () # IMPROVEME
-#{
+function repeat_yn () # IMPROVEME
+{
     while [[ true ]]; do
 
 	eval "$@";
@@ -19,4 +19,4 @@
 	read junk;
 	
     done
-#}
+}

@@ -3,16 +3,34 @@
 #any image file will be converted to thumb nail size
 
 function usage() {
-        echo USAGE: "$1 <file name> "
+    echo USAGE: "$1 <file name> "
 }
 
-   if [ $# -lt 1 ]
-   then
+#!/bin/sh
+
+########################
+## using “convert” from ImageMagick to do ps convert into PNG
+#########################
+
+echo PS convert to PNG, please wait the process
+
+for INP in *.eps
+do
+newname=`basename $INP .eps`
+convert -density 150 -geometry 100% $INP $newname%02d.png
+echo ” convert $INP to $newname.png completely”
+done
+echo ” process ended, please check your graphical files”
+
+#something I changed on labubu
+
+if [ $# -lt 1 ]
+then
     echo "${#} arguments."
-    	usage webthumb
-    	return 1
-   fi
- 
+    usage webthumb
+    return 1
+fi
+
 
 for fullpath in "$@" ; do
 
@@ -24,14 +42,14 @@ for fullpath in "$@" ; do
         base=".$ext"
         ext=""
     fi
-    
+
     echo $filename
     echo $dir
     echo $base
     echo $ext
 
-cd ${dir:-.}
-pwd
+    cd ${dir:-.}
 
-
+    ps2png 
+    
 done
