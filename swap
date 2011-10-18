@@ -3,22 +3,22 @@
 #---------------------------------------------------------------------------
 # Author: from ubuntu forums  Email: yagneshmsc@NOSPAMgmail.com
 # DATE: 2010-09-09
-# Purpose: swap two files around 
-# 
+# Purpose: swap two files around
+#
 # Current Version: 0.1
 # Latest change on 2010-09-09 01:25
 #---------------------------------------------------------------------------
 
 
-# function swap()  # Swap 2 filenames around, if they exist
-# {                #(from Uzi's bashrc).
-    local TMPFILE=tmp.$$ 
+function swap()  # Swap 2 filenames around, if they exist
+{                #(from Uzi's bashrc).
+    local TMPFILE=tmp.$$
 
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
     [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
     [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
 
-    mv "$1" $TMPFILE 
+    mv "$1" $TMPFILE
     mv "$2" "$1"
     mv $TMPFILE "$2"
-#}
+}
