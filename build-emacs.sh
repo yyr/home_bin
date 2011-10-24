@@ -8,6 +8,15 @@
 #
 # Description:
 # build emacs with latest checkout
+#! /bin/bash
+# -*- coding: utf-8 -*-
+#
+# Create a nightly Emacs build from Git.
+#
+# © 2008, 2009.
+# Author: Ian Eure <ieure@blarg.net>
+#
+# $Id$
 
 function check_error() {
     if [[ $? != 0 ]] ; then
@@ -85,7 +94,7 @@ function get_flags() {          # any flags (changes from system to system)
             conf_flags=' --with-jpeg=no --with-gif=no --with-tiff=no --without-gnutls'
             ;;
         * )
-            conf_flags=""
+            conf_flags=" --with-gnutls=yes"
             ;;
     esac
 }
