@@ -1,20 +1,8 @@
 #!/bin/sh
 
-########################
-## using “convert” from ImageMagick to do ps convert into PNG
-#########################
-
-echo PS convert to PNG, please wait the process
-
-ext=$1
-out_ext=$2
-
-for INP in *.$ext
+for INP in $@
 do
-    newname=`basename $INP .$ext`
-    convert -density 150 -geometry 100% $INP $INP.png
+    newname=`basename $INP .eps`
+    convert -density 150 -geometry 100% $INP $newname%02d.png
     echo ” convert $INP to $newname.png completed”
 done
-echo ” process ended, please check your graphical files”
-
-#something I changed on labubu
