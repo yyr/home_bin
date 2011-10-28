@@ -11,8 +11,10 @@
 #
 #--------------User modifications------------------
 installdir="/home/$(whoami)/local/python"
+in_name="PYTHON"
+
 srcdir=~/src
-py_ver=3.2
+py_ver=3.2.2
 
 py_dir="Python-$py_ver"
 source_tar="Python-$py_ver.tgz"
@@ -25,8 +27,8 @@ function build_dep () {
 
 function build() {
     ./configure --prefix=$installdir
-    make
-    make altinstall
+    make | tee $in_name.make.log
+    make altinstall tee $in_name.altinstall.log
 }
 
 function wget_down() {
@@ -40,13 +42,19 @@ function wget_down() {
 
 # ------------------------------
 cd $srcdir;
-# build_dep
-# wget_down
-# extract $source_tar           # extract is bash function to extract the any compressed file
+#build_dep
+if [ ! -f $source_tar ]; then
+    wget_down
+    tar xvf $source_tar           # extract is bash function to extract the any compressed file
+else
+    tar xvf $source_tar           # extract is bash function to extract the any compressed file
+fi
+
 
 
 echo $srcdir/$py_dir
 cd $srcdir/$py_dir
+
 echo building: $py_ver
 pwd
 build

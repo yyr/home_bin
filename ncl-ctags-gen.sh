@@ -10,7 +10,7 @@
 # Description:
 
 ctags-exuberant -e -a --verbose=yes  --langdef=ncl \
-    --langmap=ncl:.ncl --regex-ncl='/^[[:space:]]*function[[:space:]]+(.*)/\1/f,function/' *.ncl \
-    --regex-ncl='/^[[:space:]]*procedure[[:space:]]+(.*)/\1/p,procedure/' `find . -type f -name "*.ncl"`
+    --langmap=ncl:.ncl --regex-ncl='/^[[:space:]]*function[[:space:]]+(.*)/\1/f,function/' \
+    --regex-ncl='/^[[:space:]]*procedure[[:space:]]+(.*)/\1/p,procedure/' `find ${1:-"."} -type f -name "*.ncl"`
 
 # ncl-ctags-gen.sh ends here
