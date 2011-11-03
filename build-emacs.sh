@@ -4,19 +4,8 @@
 #    File: buildemacs.sh
 #  Author: Yagnesh Raghava Yakkala <yagnesh@live.com>
 # Created: Tuesday, March 22 2011
-# Licence: Gpl v3 or later
+# Licence: GPL v3 or later
 #
-# Description:
-# build emacs with latest checkout
-#! /bin/bash
-# -*- coding: utf-8 -*-
-#
-# Create a nightly Emacs build from Git.
-#
-# © 2008, 2009.
-# Author: Ian Eure <ieure@blarg.net>
-#
-# $Id$
 
 function check_error() {
     if [[ $? != 0 ]] ; then
@@ -107,14 +96,16 @@ function run_configure() {
 }
 
 function run_make() {
-    # $Make clean &> /dev/null
-    announce 'Running: make bootstrap'
-    # $Make $Bootstrap &> bootstrap.log
+    if [ $1 -eq "clean"  ]; then
+        announce 'Running: make bootstrap'
+        $Make clean &> /dev/null
+        $Make $Bootstrap &> bootstrap.log
+    fi
     $Make &> make.log
     check_error "Make"
 }
 
-function back_up() {		# backup old installations
+function back_up() {        # backup old installations
     announce 'Running: backup'
     if [ -d $install_dir ]; then
         if [ -d $backup_dir ]; then
