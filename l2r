@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 2 ]
+then
+    echo "two args <local files> <remote dir>"
+    exit
+fi
+##
+
+
+case `hostname` in
+    okho* )
+        echo "not implimented yet"
+	;;
+    amur* )
+        scp -r $1 $vlubu:$2
+	;;
+    * )
+	echo "not the hostname I am aware of"
+	;;
+
+esac

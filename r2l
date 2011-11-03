@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]
+then
+    echo "hmm.. no args given: atleast one needed"
+    echo $0 <file/Pattern> <localDirName>
+    exit
+fi
+##
+
+
+case `hostname` in
+    okho* )
+        echo "not implimented yet"
+	;;
+    amur* )
+        scp -r $vlubu:$1 ${2:-.}
+	;;
+    * )
+	echo "not the hostname I am aware of"
+	;;
+
+esac
