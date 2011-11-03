@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
+## Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
+## License: GPL v3 or later
 
 if [ $# -lt 2 ]
 then
+    echo "   ***NO ARGS***  Two args needed"
     echo "two args <local files> <remote dir>"
     exit
 fi
-##
-
 
 case `hostname` in
     okho* )
         echo "not implimented yet"
-	;;
+        ;;
     amur* )
         scp -r $1 $vlubu:$2
-	;;
+        ;;
     * )
-	echo "not the hostname I am aware of"
-	;;
-
+        echo "not the hostname I am aware of"
+        ;;
 esac
+
+
+## Local Variables:
+## mode: sh
+## End:

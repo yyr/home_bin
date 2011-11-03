@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+## Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
+## License: GPL v3 or later
 
 if [ $# -lt 1 ]
 then
-    echo "hmm.. no args given: atleast one needed"
-    echo $0 <file/Pattern> <localDirName>
+    echo "   ***NO ARGS***  atleast one needed"
+    echo "$0 <file/Pattern> <localDirName>"
     exit
 fi
 ##
@@ -12,12 +14,16 @@ fi
 case `hostname` in
     okho* )
         echo "not implimented yet"
-	;;
+        ;;
     amur* )
         scp -r $vlubu:$1 ${2:-.}
-	;;
+        ;;
     * )
-	echo "not the hostname I am aware of"
-	;;
-
+        echo "not the hostname I am aware of"
+        ;;
 esac
+
+
+## Local Variables:
+## mode: sh
+## End:
