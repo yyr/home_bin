@@ -96,12 +96,14 @@ function run_configure() {
 }
 
 function run_make() {
-    if [ $1 -eq "clean"  ]; then
+    if [ ${1:-" "} = "clean"  ]; then
         announce 'Running: make bootstrap'
         $Make clean &> /dev/null
         $Make $Bootstrap &> bootstrap.log
+    else
+        announce 'Running: make'
+        $Make &> make.log
     fi
-    $Make &> make.log
     check_error "Make"
 }
 
@@ -161,7 +163,7 @@ git_update                      # pull from repo
 run_autogen                     # run the autogen to prepare configure script
 get_flags                       # look for any flags
 run_configure                   # runn the configure script
-run_make                        # make (make bootstrap)
+run_make $1                        # make (make bootstrap)
 back_up                         # backup old installation if any and remove old backups
 make_install                    # install to the specified directory
 
