@@ -19,19 +19,27 @@ fi
 
 uname=$(whoami)
 
-case `hostname` in
-    raghava* )
-        unison $1 ssh://$uname@$Lubu//home/yagnesh/$1
-        ;;
-    okho* )
-        unison $1 ssh://$uname@$Lpy//home/yagnesh/$1
-        ;;
-    * )
-        echo "not the hostname I am aware of"
-        exit 128
-        ;;
+counter=0
+while [ $counter -le $# ]; do
+    echo
+    echo "----- unison running on folder:    $1  -----"
+    echo
+    case `hostname` in
+        raghava* )
+            unison $1 ssh://$uname@$Lubu//home/yagnesh/$1
+            ;;
+        okho* )
+            unison $1 ssh://$uname@$Lpy//home/yagnesh/$1
+            ;;
+        * )
+            echo "not the hostname I am aware of"
+            exit 128
+            ;;
 
-esac
+    esac
+    shift
+    let counter=counter+1
+done
 
 
 # usync.sh ends here
