@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+apps_file=~/git/org/linux/apps
+
+for arg in $@; do
+    echo installing $arg ..........
+    sudo apt-get install $arg
+    if [ $? == 0 ]; then
+            echo $arg >> $apps_file
+    fi
+
+    echo
+    echo
+done
