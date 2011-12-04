@@ -49,29 +49,36 @@ COLS=80
 while [ $# != 0 ];
 do
     case $1 in
-        -80)    COLS=80
+        -80)
+            COLS=80
             FONT=spc12x24c
             BFONT=spc12x24b
             shift
             ;;
-        -132)   COLS=132
+        -132)
+            COLS=132
             FONT=9x15
             BFONT=9x15b
             shift
             ;;
-        -fg)    shift
+        -fg)
+            shift
             FG=$1
             shift;;
-        -bg)    shift
+        -bg)
+            shift
             BG=$1
             shift;;
-        -fn)    shift
+        -fn)
+            shift
             FONT=$1
             shift;;
-        -fb)    shift
+        -fb)
+            shift
             BFONT=$1
             shift;;
-        -host)  shift
+        -host)
+            shift
             HOST=$1
             shift;;
         -help)  Usage;;
