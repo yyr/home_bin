@@ -8,30 +8,30 @@
 #
 # Usage statement
 Usage(){
-echo
-echo " Usage  : vmsterm -options"
-echo
-echo " Options: -80   for 80 column terminal"
-echo "          -132  for 132 column terminal"
-echo "          -bg colorname"
-echo "          -fg colorname"
-echo "          -fn fontname"
-echo "          -fb bold fontname"
-echo "          -host [crusher.saltmine.com] [earth] [192.168.7.7]"
-echo ""
-echo " Example: \"vmsterm -80 -fg white -bg black -fn 9x15 -fb 9x15b -host earth\""
-echo "          Starts a VMS session with an 80 column terminal"
-echo "          with a black background, white foreground, a normal"
-echo "          font of 9x15 and a bold font of 9x15b, and connects"
-echo "          to the node 'earth'"
-echo ""
-echo " Example: \"vmsterm -host earth\""
-echo "          Starts a VMS session with default terminal settings "
-echo ""
-echo " Example: \"vmsterm -help\""
-echo "          Displays vmsterm options "
-echo
-exit 1
+    echo
+    echo " Usage  : vmsterm -options"
+    echo
+    echo " Options: -80   for 80 column terminal"
+    echo "          -132  for 132 column terminal"
+    echo "          -bg colorname"
+    echo "          -fg colorname"
+    echo "          -fn fontname"
+    echo "          -fb bold fontname"
+    echo "          -host [crusher.saltmine.com] [earth] [192.168.7.7]"
+    echo ""
+    echo " Example: \"vmsterm -80 -fg white -bg black -fn 9x15 -fb 9x15b -host earth\""
+    echo "          Starts a VMS session with an 80 column terminal"
+    echo "          with a black background, white foreground, a normal"
+    echo "          font of 9x15 and a bold font of 9x15b, and connects"
+    echo "          to the node 'earth'"
+    echo ""
+    echo " Example: \"vmsterm -host earth\""
+    echo "          Starts a VMS session with default terminal settings "
+    echo ""
+    echo " Example: \"vmsterm -help\""
+    echo "          Displays vmsterm options "
+    echo
+    exit 1
 }
 
 # Default to a black foreground with a white background.
@@ -48,41 +48,41 @@ COLS=80
 #
 while [ $# != 0 ];
 do
-case $1 in
--80)    COLS=80
-FONT=spc12x24c
-BFONT=spc12x24b
-shift
-;;
--132)   COLS=132
-FONT=9x15
-BFONT=9x15b
-shift
-;;
--fg)    shift
-FG=$1
-shift;;
--bg)    shift
-BG=$1
-shift;;
--fn)    shift
-FONT=$1
-shift;;
--fb)    shift
-BFONT=$1
-shift;;
--host)  shift
-HOST=$1
-shift;;
--help)  Usage;;
-*)      Usage;;
-esac
+    case $1 in
+        -80)    COLS=80
+            FONT=spc12x24c
+            BFONT=spc12x24b
+            shift
+            ;;
+        -132)   COLS=132
+            FONT=9x15
+            BFONT=9x15b
+            shift
+            ;;
+        -fg)    shift
+            FG=$1
+            shift;;
+        -bg)    shift
+            BG=$1
+            shift;;
+        -fn)    shift
+            FONT=$1
+            shift;;
+        -fb)    shift
+            BFONT=$1
+            shift;;
+        -host)  shift
+            HOST=$1
+            shift;;
+        -help)  Usage;;
+        *)      Usage;;
+    esac
 done
 
 xterm   -title "VMSTERM" -sb -sl 1000 -geo ${COLS}x24 -fg ${FG} -bg ${BG} \
-# -cr blue -fn ${FONT} -fb ${BFONT} -xrm \
- -cr blue  -fb ${BFONT} -xrm \
-'XTerm*VT100.translations: #override \n \
+    # -cr blue -fn ${FONT} -fb ${BFONT} -xrm \
+-cr blue  -fb ${BFONT} -xrm \
+    'XTerm*VT100.translations: #override \n \
 ~Shift  <Key>F1:        string(0x1b)    string("OP") \n \
 ~Shift  <Key>F2:        string(0x1b)    string("OQ") \n \
 ~Shift  <Key>F3:        string(0x1b)    string("OR") \n \
@@ -140,4 +140,4 @@ Shift   <Key>Up:                scroll-back(1,lines) \n \
 Shift   <Key>Down:      scroll-forw(1,lines) \n \
 <Key>Right:     string(0x1b)    string("[C") \n \
 <Key>Left:      string(0x1b)    string("[D")' \
--e telnet $HOST
+    -e telnet $HOST
