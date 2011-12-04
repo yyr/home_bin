@@ -6,7 +6,6 @@ function usage() {
     echo USAGE: "$1 <file name> "
 }
 
-#!/bin/sh
 
 ########################
 ## using “convert” from ImageMagick to do ps convert into PNG
@@ -50,6 +49,4 @@ for fullpath in "$@" ; do
 
     cd ${dir:-.}
 
-    ps2png 
-    
 done

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+function cm ()
+{
+    cat $1 | more
+}

@@ -90,7 +90,7 @@ function get_flags() {          # any flags (changes from system to system)
 
 function run_configure() {
     announce 'Running: configure'
-    ./configure --prefix=$install_dir $conf_flags &> conf.log
+    ./configure -C --prefix=$install_dir $conf_flags &> conf.log
     check_error "configure"
 
 }

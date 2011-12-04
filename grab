@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+grab() {
+    sudo chown -R ${USER} ${1:-.}
+}
+
+grab $@
