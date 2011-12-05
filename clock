@@ -5,5 +5,12 @@
 # clock - A bash clock that can run in your terminal window.
 clock ()
 {
-    while true;do clear;echo "===========";date +"%r";echo "===========";sleep 1;done
+    while true;
+    do
+        clear;
+        echo "===========";
+        date +"%r";
+        echo "===========";
+        sleep 1;
+    done
 }

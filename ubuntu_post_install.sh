@@ -28,6 +28,4 @@ function install_apps () {
 }
 
 install_apps
-
-
 # ubuntu_post_install.sh ends here

@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 # -*- mode: shell-script; -*-
-#---------------------------------------------------------------------------
-# Author: from ubuntu forums  Email: yagneshmsc@NOSPAMgmail.com
+# Source: ubuntuforums.org
 # DATE: 2010-09-09
-# Purpose: swap two files around
-#
-# Current Version: 0.1
-# Latest change on 2010-09-09 01:25
 #---------------------------------------------------------------------------
 
 
@@ -22,3 +17,5 @@ function swap()  # Swap 2 filenames around, if they exist
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
+
+swap $@

@@ -25,20 +25,20 @@ MinArgs=1
 
 case `hostname` in
     raghava* )
-	$rsync_cmd $Dir $Lubu:$Dir
-	$rsync_cmd $Lubu:$Dir $Dir
-	;;
+        $rsync_cmd $Dir $Lubu:$Dir
+        $rsync_cmd $Lubu:$Dir $Dir
+        ;;
     okho* )
-	$rsync_cmd $Dir  $Lpy:$Dir
-	$rsync_cmd $Lpy:$Dir $Dir
-	;;
+        $rsync_cmd $Dir  $Lpy:$Dir
+        $rsync_cmd $Lpy:$Dir $Dir
+        ;;
     amur* )
-	$rsync_cmd $Dir $Lubu:$Dir
-	$rsync_cmd $Lubu:$Dir $Dir
-	;;
+        $rsync_cmd $Dir $Lubu:$Dir
+        $rsync_cmd $Lubu:$Dir $Dir
+        ;;
     * )
-	echo "not the hostname I am aware of"
-	;;
+        echo "not the hostname I am aware of"
+        ;;
 
 esac
 

@@ -9,27 +9,27 @@
 
 # Usage statement
 Usage(){
-echo
-echo " Usage  : vax -options"
-echo
-echo " Options: -80   for 80 column terminal"
-echo "          -132  for 132 column terminal"
-echo "          -fg colorname"
-echo "          -bg colorname"
-echo "          -fn fontname"
-echo "          -fb bold fontname"
-echo "          -host [altair] [devel] [leonis] [castor]"
-echo ""
-echo " Example: \"vax -80 -fg white -bg black -fn 9x15 -fb 9x15b -host castor\""
-echo "          Starts a VAX session with an 80 column terminal"
-echo "          with a black background, white foreground, a normal"
-echo "          font of 9x15 and a bold font of 9x15b, and connects"
-echo "          to the node 'castor'"
-echo
-echo "          If you need additional help, please call Workstation"
-echo "          Services at x92396."
-echo
-exit 1
+    echo
+    echo " Usage  : vax -options"
+    echo
+    echo " Options: -80   for 80 column terminal"
+    echo "          -132  for 132 column terminal"
+    echo "          -fg colorname"
+    echo "          -bg colorname"
+    echo "          -fn fontname"
+    echo "          -fb bold fontname"
+    echo "          -host [altair] [devel] [leonis] [castor]"
+    echo ""
+    echo " Example: \"vax -80 -fg white -bg black -fn 9x15 -fb 9x15b -host castor\""
+    echo "          Starts a VAX session with an 80 column terminal"
+    echo "          with a black background, white foreground, a normal"
+    echo "          font of 9x15 and a bold font of 9x15b, and connects"
+    echo "          to the node 'castor'"
+    echo
+    echo "          If you need additional help, please call Workstation"
+    echo "          Services at x92396."
+    echo
+    exit 1
 }
 
 # Default to a black foreground with a white background.
@@ -46,39 +46,39 @@ COLS=80
 #
 while [ $# != 0 ];
 do
-case $1 in
--80)    COLS=80
-FONT=spc12x24c
-BFONT=spc12x24b
-shift
-;;
--132)   COLS=132
-FONT=9x15
-BFONT=9x15b
-shift
-;;
--fg)    shift
-FG=$1
-shift;;
--bg)    shift
-BG=$1
-shift;;
--fn)    shift
-FONT=$1
-shift;;
--fb)    shift
-BFONT=$1
-shift;;
--host)  shift
-HOST=$1
-shift;;
--help)  Usage;;
-*)      Usage;;
-esac
+    case $1 in
+        -80)    COLS=80
+            FONT=spc12x24c
+            BFONT=spc12x24b
+            shift
+            ;;
+        -132)   COLS=132
+            FONT=9x15
+            BFONT=9x15b
+            shift
+            ;;
+        -fg)    shift
+            FG=$1
+            shift;;
+        -bg)    shift
+            BG=$1
+            shift;;
+        -fn)    shift
+            FONT=$1
+            shift;;
+        -fb)    shift
+            BFONT=$1
+            shift;;
+        -host)  shift
+            HOST=$1
+            shift;;
+        -help)  Usage;;
+        *)      Usage;;
+    esac
 done
 
 xterm  -title "VAX" -sb -sl 1200 -geo ${COLS}x24 -fg ${FG} -bg ${BG} \
-# -cr red -fn ${FONT} -fb ${BFONT} -xrm \
+    # -cr red -fn ${FONT} -fb ${BFONT} -xrm \
 -cr red  -fb ${BFONT} -xrm \
 
 'XTerm*VT100.translations:     #override \n\
@@ -123,4 +123,4 @@ Meta <Key>0x1000FF04:   insert-selection(CLIPBOARD) \n\
 <Btn1Up>:               select-end(PRIMARY,CUT_BUFFER0) \n\
 Button1<Btn2Down>:      select-end(CLIPBOARD) \n\
 Button1<Btn2Up>:        ignore()' \
--e telnet $HOST &
+    -e telnet $HOST &

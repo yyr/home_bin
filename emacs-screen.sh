@@ -27,52 +27,52 @@ OUR_MSG_WAIT=0.1 # so we don't pause 2 entire seconds when switching
 argv[(r)-g]=()
 
 isInScreen() {
-  echo $TERMCAP | grep -q -E '^SC'
+    echo $TERMCAP | grep -q -E '^SC'
 }
 
 isParentShell() {
-  [ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]
+    [ $(ps h -p $PPID -o comm 2> /dev/null | tail -1) = "${SHELL//*\/}" ]
 }
 
 runEmacsClient() {
-  emacsclient "$@" > /dev/null
-  selectScreenWindow $WINDOW
+    emacsclient "$@" > /dev/null
+    selectScreenWindow $WINDOW
 }
 
 runRegularEmacs() {
-  emacs -nw "$@"
+    emacs -nw "$@"
 }
 
 selectScreenWindow() {
-  setScreenMsgWait $OUR_MSG_WAIT # do not hold screen with messages
-  screen -X focus
-  screen -X select $1
-  setScreenMsgWait $DEFAULT_MSG_WAIT # reset default
+    setScreenMsgWait $OUR_MSG_WAIT # do not hold screen with messages
+    screen -X focus
+    screen -X select $1
+    setScreenMsgWait $DEFAULT_MSG_WAIT # reset default
 }
 
 setScreenMsgWait() {
-  screen -X msgwait $1
+    screen -X msgwait $1
 }
 
 startEmacsServer() {
-  screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
-  screen emacs -nw --eval '(progn (server-start)
+    screen -X setenv SERVER_WINDOW_FILE $SERVER_WINDOW_FILE
+    screen emacs -nw --eval '(progn (server-start)
                            (shell-command "echo $WINDOW > $SERVER_WINDOW_FILE")
                            (add-hook '\''kill-emacs-hook (lambda() (delete-file (getenv "SERVER_WINDOW_FILE")))))'
 }
 
 if [ -z "$SUDO_COMMAND" -a "$HOME" != "/root" ] && isInScreen ; then
-  if [ -f $SERVER_WINDOW_FILE ] ; then
-    selectScreenWindow `cat $SERVER_WINDOW_FILE` # switch to server window
-  else # gonna have to start emacs server
-    startEmacsServer
-    while [ ! -f $SERVER_WINDOW_FILE ] ; do sleep .1 ; done # wait for it
-  fi
-  if [ $AUTO_BACKGROUND = "yes" ] && isParentShell ; then
-    runEmacsClient "$@" &
-  else
-    runEmacsClient "$@"
-  fi
+    if [ -f $SERVER_WINDOW_FILE ] ; then
+        selectScreenWindow `cat $SERVER_WINDOW_FILE` # switch to server window
+    else # gonna have to start emacs server
+        startEmacsServer
+        while [ ! -f $SERVER_WINDOW_FILE ] ; do sleep .1 ; done # wait for it
+    fi
+    if [ $AUTO_BACKGROUND = "yes" ] && isParentShell ; then
+        runEmacsClient "$@" &
+    else
+        runEmacsClient "$@"
+    fi
 else
-  runRegularEmacs "$@"
+    runRegularEmacs "$@"
 fi

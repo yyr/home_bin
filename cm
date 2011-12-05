@@ -4,3 +4,5 @@ function cm ()
 {
     cat $1 | more
 }
+
+cm $@

@@ -1,14 +1,13 @@
 #!/bin/bash
-
-# ******************************************************************************|
-#  Author: Yagnesh raghava  Yakkala                                             |
+#
+# ******************************************************************************
+#  Author: Yagnesh raghava  Yakkala
 #  DATE:2010-06-18
-#  Purpose: getting multiple returns from a out put
-
-#                                                                               |
-#  Current Version: 
+#  Purpose: split path and filename (extention as well)
+#
+#  Current Version:
 #  Latest change by on 2010-06-18 10:20
-# ..............................................................................!
+# ..............................................................................
 
 function splitpath()  # splits file name and folders
 {
@@ -32,7 +31,7 @@ EXT=
 
 FULLPATH="$@"
 
-splitpath $FULLPATH                                                                                                          
+splitpath $FULLPATH
 
 echo "FILENAME=$FILENAME"
 echo "     DIR=$DIR"

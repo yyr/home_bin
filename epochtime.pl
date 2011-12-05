@@ -10,7 +10,7 @@
 
 $num_args = $#ARGV + 1;
 die "Usage: this-program epochtime (something like '1219822177')" if
-($num_args != 1);
+  ($num_args != 1);
 
 $epoch_time = $ARGV[0];
 

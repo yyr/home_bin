@@ -6,7 +6,6 @@ function usage() {
     echo USAGE: "$1 <file name> "
 }
 
-
 ########################
 ## using “convert” from ImageMagick to do ps convert into PNG
 #########################
@@ -21,15 +20,12 @@ echo ” convert $INP to $newname.png completely”
 done
 echo ” process ended, please check your graphical files”
 
-#something I changed on labubu
-
 if [ $# -lt 1 ]
 then
     echo "${#} arguments."
     usage webthumb
     return 1
 fi
-
 
 for fullpath in "$@" ; do
 

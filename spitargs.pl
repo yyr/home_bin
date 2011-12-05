@@ -1,7 +1,8 @@
 #!/usr/bin/env perl
 #
-#   Description:  Spits out command line arguments to show what the shell thinks are separate option words.
-#
+#  Description: Spits out command line arguments to show what the
+#   shell thinks are separate option words.
+#  Source: ubuntuforums.org
 
 use strict;
 

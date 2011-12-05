@@ -7,7 +7,7 @@
 # Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
 #
 
-# Description: 
+# Description:
 
 site_folder=~/git/sites/yorg/
 cd $site_folder;
