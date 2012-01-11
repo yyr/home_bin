@@ -42,7 +42,7 @@ function run_autogen() {        # run autogen.sh
 # code starts here
 
 #Error returns
-repo_dir=~/git/repos/emacs
+repo_dir=~/repos/emacs
 
 install_dir=$HOME/local/emacs-git
 backup_dir=$HOME/local/emacs-backup
