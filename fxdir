@@ -2,6 +2,7 @@
 
 if [ $# -lt 2 ]; then
     echo "USAGE: $0 <search_term> <list of of commands with single quote>"
+    exit 2
 fi
 
 base=$(pwd)
