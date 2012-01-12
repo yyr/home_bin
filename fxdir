@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 2 ]; then
+    echo "USAGE: $0 <search_term> <list of of commands with single quote>"
+fi
+
+base=$(pwd)
+s=$1;shift
+c=$@
+
+find $(pwd) -type d -name $s  |
+xargs  -I"{}" sh -c "$c"
