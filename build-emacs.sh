@@ -9,64 +9,92 @@
 
 function announce() {
     echo "
-################################
+============================================
 $@
-################################
+============================================
 "
 }
 
-function exit_with_error() {
-    announce "RUNNING:  $1"
-    $1 &> $2
-    if [[ $? != 0 ]] ; then
-        error_convay "while running  $1"
-        exit 100;
-    fi
-
+function error_convay () {
+    announce "
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ERROR: $@
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+"
+    exit 24
 }
 
-function error_convay () {
-    announce ERROR: $@
+function run_configure()
+{
+    announce "running configure"
+    ./configure --prefix=$install_dir $conf_flags > config.log ||
+    error_convay "while running 'configure' check config.log"
+}
+
+function run_make()
+{
+    announce "running make"
+    if [ $bootstrap == "yes" ]; then
+        make bootstrap > bootstrap.log  ||
+        error_convay "while running 'make bootstrap' check config.log"
+    else
+        make > make.log ||
+        error_convay "while running 'make' check config.log"
+    fi
+}
+
+function run_git()
+{
+    announce "running git update"
+    git reset --hard
+    git pull
 }
 
 function run_autogen() {        # run autogen.sh
     announce "running autogen.sh"
-    if [ `hostname` == "amur" ]; then
+    ./autogen.sh &> autogen.log
+
+    # if autogen fails fallback method
+    if [ $? -ne 0 ]; then
         ./autogen/copy_autogen
-    else
-        ./autogen.sh &> autogen.log
     fi
+
 }
 
 #--------------------------------------------------------------
 # code starts here
 
-#Error returns
-repo_dir=~/repos/emacs
+case `hostname` in
+    amur*)
+        conf_flags=' --with-jpeg=no --with-gif=no --with-tiff=no --without-gnutls'
+        ;;
+    *)
+        conf_flags=" --with-gnutls=yes"
+esac
 
+repo_dir=~/repos/emacs
 install_dir=$HOME/local/emacs-git
 backup_dir=$HOME/local/emacs-backup
 
-cd $repo_dir
 
-MAKE=make
-Bootstrap=bootstrap
+# NO NEED EDIT BELOW
+#
+cd $repo_dir
+run_git                      # may be update to latest trunk
+
+# by default try to run make normally if there is no
+# configure script then run "make bootstrap"
+bootstrap="no"
 
 if [ ! -f configure ]; then
-    run_autogen                     # run the autogen to prepare configure script
+    run_autogen
+    bootstrap=yes
 fi
 
-git pull
+run_configure
+run_make
 
-case $Hostname in
-    amur )
-        conf_flags=' --with-jpeg=no --with-gif=no --with-tiff=no --without-gnutls'
-        ;;
-    * )
-        conf_flags=" --with-gnutls=yes"
-        ;;
-esac
-
+# back up earlier installation
 if [ -d $install_dir ]; then
     if [ -d $backup_dir ]; then
         rm -r $backup_dir
@@ -74,8 +102,7 @@ if [ -d $install_dir ]; then
     mv $install_dir  ${backup_dir}
 fi
 
-exit_with_error "make" "make.log"
-exit_with_error "make install" "install.log"
-[ $? == 0 ] && announce "built emacs successfully"
+make install > install.log || error_convay "while running 'make install' check install.log"
+announce "built emacs successfully"
 
 # buildemacs.sh ends here
