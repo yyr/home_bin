@@ -27,11 +27,11 @@ while [ $counter -le $# ]; do
     case `hostname` in
         raghava* )
             echo call: unison $1 ssh://$uname@$Lubu//$1
-            unison $1 ssh://$uname@$Lubu//$1
+            unison -batch $1 ssh://$uname@$Lubu//$1
             ;;
         okho* )
             echo call: unison $1 ssh://$uname@$Lpy//$1
-            unison $1 ssh://$uname@$Lpy//$1
+            unison -batch $1 ssh://$uname@$Lpy//$1
             ;;
         * )
             echo "not the hostname I am aware of"
