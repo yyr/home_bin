@@ -12,36 +12,54 @@ Lpy=raghava-note.lowtem.hokudai.ac.jp
 
 MinArgs=1
 
+function usage()
+{
+        cat <<EOF
+USAGE:
+       $0 -options folder
+Options:
+          -i run unison interactively
+EOF
+}
+
 if [[ $# < $MinArgs ]]; then
-    echo USAGE: $0 folder
+    usage
     exit $MinArgs
 fi
+
+unison="unison -batch"
 
 uname=$(whoami)
 
 counter=0
 while [ $counter -le $# ]; do
-    echo
-    echo "----- unison running on folder:    $1  -----"
-    echo
-    case `hostname` in
-        raghava* )
-            echo call: unison $1 ssh://$uname@$Lubu//$1
-            unison -batch $1 ssh://$uname@$Lubu//$1
+    case $1 in
+        -i)
+            unison=unison
+            shift
             ;;
-        okho* )
-            echo call: unison $1 ssh://$uname@$Lpy//$1
-            unison -batch $1 ssh://$uname@$Lpy//$1
+        *)
+            echo
+            echo "----- unison running on folder:    $1  -----"
+            echo
+            case `hostname` in
+                raghava* )
+                    echo call: unison $1 ssh://$uname@$Lubu//$1
+                    ${unison} $1 ssh://$uname@$Lubu//$1
+                    ;;
+                okho* )
+                    echo call: unison $1 ssh://$uname@$Lpy//$1
+                    ${unison} $1 ssh://$uname@$Lpy//$1
+                    ;;
+                * )
+                    echo "not the hostname I am aware of"
+                    exit 128
+                    ;;
+            esac
+            shift
             ;;
-        * )
-            echo "not the hostname I am aware of"
-            exit 128
-            ;;
-
     esac
-    shift
     let counter=counter+1
 done
-
 
 # usync.sh ends here
