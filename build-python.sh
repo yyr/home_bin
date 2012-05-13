@@ -10,11 +10,11 @@
 # Description:
 #
 #--------------User modifications------------------
-installdir="/home/$(whoami)/local/python"
-in_name="PYTHON"
-
+py_ver=2.7.2
 srcdir=~/src
-py_ver=3.2.2
+
+installdir="/home/$(whoami)/local/python${py_ver}"
+in_name="PYTHON"
 
 py_dir="Python-$py_ver"
 source_tar="Python-$py_ver.tgz"
@@ -28,7 +28,7 @@ function build_dep () {
 function build() {
     ./configure --prefix=$installdir
     make | tee $in_name.make.log
-    make altinstall tee $in_name.altinstall.log
+    make altinstall | tee $in_name.altinstall.log
 }
 
 function wget_down() {
