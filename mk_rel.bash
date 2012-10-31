@@ -1,4 +1,12 @@
 #!/bin/bash
+# make release from a git repo
+# either by tag or rev or HEAD,
+# (takes folder name as directory)
+
+if [ ! -d .git ] ; then
+    echo "This should be called in the git repository"
+    exit
+fi
 
 repo_name=${PWD##*/}            # most likely the directory name
 
@@ -7,8 +15,9 @@ function mk_dist()
     VERSION=$(git describe --tags)
     git archive --format=tar \
         --output ${repo_name}-$VERSION.tar \
+        --output $repo_name-$VERSION.tar \
         --prefix="$repo_name/"  $VERSION
-    gzip wrf_install-$VERSION.tar
+    gzip $repo_name-$VERSION.tar
 }
 
 if [ -z "$1" ]; then
