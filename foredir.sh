@@ -7,8 +7,8 @@
 # Licence: GPL v3 or later. You should get a copy from <http://www.gnu.org/licenses/gpl.html>
 #
 
-# Description: 
-# It just goes to subdirectory (depth to 1) 
+# Description:
+# It just goes to subdirectory (depth to 1)
 
 Args=$@
 PWD=`pwd`
@@ -16,9 +16,12 @@ PWD=`pwd`
 
 for Dir in `find $PWD -maxdepth 1 -type d` ; do
     cd $Dir
+    echo
+    echo "-------------------------------------------"
     echo "Entered into: `pwd`"
     echo "Running $Args"
     $Args
+    echo
 done
- 
+
 # foredir.sh ends here
