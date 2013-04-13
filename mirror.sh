@@ -1,5 +1,7 @@
 #!/bin/sh
-rsync -az --exclude=.gvfs --delete /home/ /backup/home/
-rsync -az --delete /dump/ /backup/dump/
+echo "Nightly Backup Started: $(date)" >> /var/log/mirror_backup.log
 
-echo "Nightly Backup Successful: $(date)" >> /tmp/mybackup.log
+rsync -azXS --exclude=.gvfs --delete /home/ /backup/home/
+rsync -azXS --delete /dump/ /backup/dump/
+
+echo "Nightly Backup Successful: $(date)" >> /var/log/mirro_backup.log
