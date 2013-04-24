@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# -*- mode: sh; -*-
 
 npr=~/practice/ncl/
 
@@ -7,8 +8,3 @@ function run_ncl() {
 }
 
 run_ncl $1
-
-
-# Local Variables:
-# mode: shell-script
-# End:

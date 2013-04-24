@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # -*- mode: shell-script; -*-
-#---------------------------------------------------------------------------
-# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
-# DATE: 2010-09-17
-# Purpose: mount remote folder locally(~/far_projects) using sshfs, this is
-#   like alias alomst
-#
-# Time-stamp: <2001-02-18 10:20:51>
-#---------------------------------------------------------------------------
+
+# Created: 2010-09-17
+# mount remote folder locally(~/far_projects) using sshfs; alias
 
 function usage() {     # let the user know how to use this
     echo USAGE: "$1 <$USER@remote:/projects>"
