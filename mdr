@@ -17,20 +17,20 @@ import contextlib
 
 @contextlib.contextmanager
 def keep_cwd():
-    result = []
     cwd = os.getcwd()
     try:
         yield
     finally:
         os.chdir(cwd)
 
-
-
 def arg_parse(dirs=None,cmd=None):
     dir_list = 'dirlist'
     if dirs is None:
         if os.path.exists(os.path.join('.',dir_list)):
             dirs = open(dir_list,'r').read().split()
+        else:
+            print('NOTE: No dirlist file found. running only in current directory')
+            dirs = [os.getcwd()]
 
     for d in dirs:
         with keep_cwd():
@@ -39,10 +39,10 @@ def arg_parse(dirs=None,cmd=None):
             except OSError as e:
                 print(e, 'Skipping')
                 pass
-            print('running command in "%s" in "%s"' % (
+            print('\nrunning "%s" in "%s ":' % (
                 ' '.join(cmd),os.getcwd()))
             try:
-                p = subprocess.Popen(cmd,stdout=subprocess.PIPE)
+                p = subprocess.Popen(cmd,shell=True)
                 p.wait()
             except OSError as e:
                 print(e)
