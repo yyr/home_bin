@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+# -*- mode: python; coding: utf-8-unix; -*-
+"""Run a given command in multiple directories.
+
+Example:
+ - To run 'ls -l' command on /foo/bar & /foo/bax
+   mdr -d /foo/bar /foo/baz -- ls -l
+
+   List of directories can be placed file called 'dirlist'
+"""
+
+import sys
+import argparse
+import os.path
+import subprocess
+import contextlib
+
+@contextlib.contextmanager
+def keep_cwd():
+    result = []
+    cwd = os.getcwd()
+    try:
+        yield
+    finally:
+        os.chdir(cwd)
+
+
+
+def arg_parse(dirs=None,cmd=None):
+    dir_list = 'dirlist'
+    if dirs is None:
+        if os.path.exists(os.path.join('.',dir_list)):
+            dirs = open(dir_list,'r').read().split()
+
+    for d in dirs:
+        with keep_cwd():
+            try:
+                os.chdir(d)
+            except OSError as e:
+                print(e, 'Skipping')
+                pass
+            print('running command in "%s" in "%s"' % (
+                ' '.join(cmd),os.getcwd()))
+            try:
+                p = subprocess.Popen(cmd,stdout=subprocess.PIPE)
+                p.wait()
+            except OSError as e:
+                print(e)
+
+
+def main(args=None):
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,description=__doc__)
+    parser.add_argument(
+        '-d','--dirs',nargs='*',action='store')
+    parser.add_argument('cmd',nargs='+')
+
+    arg_parse(**vars(parser.parse_args(args)))
+
+
+if __name__ == '__main__':
+    main()
