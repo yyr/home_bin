@@ -1,3 +1,5 @@
 backups/*
 bin/*
 .#~
+emacs
+emacsclient

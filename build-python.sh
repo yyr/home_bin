@@ -10,11 +10,11 @@
 # Description:
 #
 #--------------User modifications------------------
-py_ver=2.7.2
-srcdir=~/src
-
+py_ver=2.7.5
 installdir="/home/$(whoami)/local/python${py_ver}"
 in_name="PYTHON"
+
+srcdir=~/src
 
 py_dir="Python-$py_ver"
 source_tar="Python-$py_ver.tgz"

@@ -1,1 +1,0 @@
-/home/yagnesh/local/emacs-git/bin/emacs

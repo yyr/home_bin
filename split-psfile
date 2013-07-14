@@ -1,0 +1,12 @@
+#!/bin/bash
+# split-psfile - splits a PS file into separate PS files,
+# one per input page
+# USAGE: $0 some-ps-file.ps some-other-psfile.ps ...
+
+for i in $@ ; do
+    j=1
+    while [[ $j -le $(grep '%%Pages:' $i | tail -1 | cut -d" " -f2) ]] ;
+    do
+        typeset -i j ; psselect -p$j $i > ${i%%\.ps}-${j}.ps; j=$((j+1))
+    done
+done

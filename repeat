@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 # -*- mode: shell-script; -*-
-#---------------------------------------------------------------------------
-# Author: yagnesh raghava yakkala  Email: yagneshmsc@NOSPAMgmail.com
+# Author: Yagnesh Raghava Yakkala
 # DATE: 2010-09-09
 # Purpose: Repeat the command n times
-#
-# 
-# Current Version: 0.1
-# Latest change by on 2010-09-09 01:42
-#---------------------------------------------------------------------------
-
-#function repeat()       # Repeat n times command.
-#{
 
 local i max
 max=$1; shift;
 for ((i=1; i <= max ; i++)); do  # --> C-like syntax
     eval "$@";
 done
-
-#}
