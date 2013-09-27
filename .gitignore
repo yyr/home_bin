@@ -1,5 +1,2 @@
-backups/*
-bin/*
 .#~
-emacs
-emacsclient
+emacs*
