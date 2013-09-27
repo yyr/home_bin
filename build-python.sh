@@ -10,7 +10,7 @@
 # Description:
 #
 #--------------User modifications------------------
-py_ver=2.7.3
+py_ver=2.7.5
 installdir="/home/$(whoami)/local/python${py_ver}"
 in_name="PYTHON"
 
