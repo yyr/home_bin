@@ -10,7 +10,7 @@ while true; do
     if [ "$NEW" != "$LAST" ]; then
         t="$(date +%s)"
         echo "watcher action started at "  $(date)
-        "$CMD" # &> /tmp/wathcer.log.$$
+        "$CMD" 2>&1 | tee /tmp/wathcer.log.$$
         LAST="$NEW"
         t="$(($(date +%s)-t))"
         printf "done; %02d:%02d\n" "$((t/60%60))" "$((t%60))"
