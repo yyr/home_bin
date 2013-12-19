@@ -10,5 +10,5 @@ sudo apt-get autoremove
 # orphaned packages
 sudo deborphan | xargs sudo apt-get -y remove --purge
 
-# computer janitor
+aptitude -F %p search '~c' | xargs sudo dpkg -P
 # ubu-disk-clean.sh ends here
