@@ -37,6 +37,13 @@ emacs \
 
         (ps-print-color-p 'black-white))
 
+        (setq buffer-file-coding-system 'utf-8-unix)
+        (setq default-file-name-coding-system 'utf-8-unix)
+        (setq default-keyboard-coding-system 'utf-8-unix)
+        (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+        (setq default-sendmail-coding-system 'utf-8-unix)
+        (setq default-terminal-coding-system 'utf-8-unix)
+
         (ps-print-buffer-with-faces \"$out\")
 
   ;; gives chars per line info, among other things
