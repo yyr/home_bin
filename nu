@@ -1,6 +1,6 @@
 #!/bin/bash
 
-;PATH+=/sbin
+PATH+=/sbin
 adapter=eth0
 internal=""
 
