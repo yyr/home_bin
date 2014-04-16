@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec identify -format "%wx%h" $1
+# exec convert $1 -print "Size: %wx%h\n" /dev/null
