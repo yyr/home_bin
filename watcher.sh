@@ -17,8 +17,7 @@ function daemon() {
             t="$(($(date +%s)-t))"
             printf "\nElapsed time: %02d:%02d\n" "$((t%3600/60))"  "$((t%60))"
         fi
-        sleep 2
+        sleep 1
     done
 }
-
 daemon $FILE $CMD
