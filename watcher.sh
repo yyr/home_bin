@@ -1,19 +1,24 @@
 #!/bin/bash
-# http://serverfault.com/a/436739
+# http://stackoverflow.com/a/9461685
 
 FILE="$1"
 shift;
 CMD="$@"
-LAST=`ls -l "$FILE"`
-while true; do
-    sleep 1
-    NEW=`ls -l "$FILE"`
-    if [ "$NEW" != "$LAST" ]; then
-        t="$(date +%s)"
-        echo "watcher action started at "  $(date)
-        eval "$CMD" 2>&1 | tee /tmp/wathcer.log.$$
-        LAST="$NEW"
-        t="$(($(date +%s)-t))"
-        printf "done; %02d:%02d\n" "$((t/60%60))" "$((t%60))"
-    fi
-done
+
+function daemon() {
+    chsum1=""
+    while [[ true ]]
+    do
+        chsum2=`find $1 -type f -and -not -path "./.git/*" -exec md5sum {} \;`
+        if [[ $chsum1 != $chsum2 ]] ; then
+            t="$(date +%s)"
+            eval "$2" 2>&1 | tee /tmp/wathcer.log.$$
+            chsum1=$chsum2
+            t="$(($(date +%s)-t))"
+            printf "\nElapsed time: %02d:%02d\n" "$((t%3600/60))"  "$((t%60))"
+        fi
+        sleep 2
+    done
+}
+
+daemon $FILE $CMD
