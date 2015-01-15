@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$#" -gt "0" ] ; then
+    filename="$1"
+else
+    filename="$(zenity --file-selection)"
+fi
+# evince "$filename" &
+zenity --info --text "This PDF has $(pdftotext "$filename" - | tr -d '.' | wc -w) words"
+exit 0
