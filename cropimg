@@ -1,0 +1,7 @@
+#!/bin/bash
+sizes=${2:-420x230+10+80}
+echo cutting size: $sizes
+
+echo convert $1  -crop $sizes temp.jpg
+convert $1  -crop $sizes temp.jpg
+eog temp.jpg
