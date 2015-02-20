@@ -2,6 +2,10 @@
 sizes=${2:-420x230+10+80}
 echo cutting size: $sizes
 
-echo convert $1  -crop $sizes temp.jpg
-convert $1  -crop $sizes temp.jpg
-eog temp.jpg
+base="${1%.[^.]*}"
+ext="${1:${#base} + 1}"
+
+
+echo convert "$base".$ext  -crop $sizes temp.$ext
+convert "$1"  -crop $sizes temp.$ext
+eog temp.$ext
