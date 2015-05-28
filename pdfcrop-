@@ -13,12 +13,13 @@ function split-path () {
     fi
 }
 
+for f in $@; do
+    echo backing up...
+    split-path $f
+    cp ${base}.${ext}  ${base}_ori.${ext}
+    cp ${base}.${ext}  ${base}_ori.${ext}
+    pdfcrop $f
 
-echo backing up...
-split-path $1
-echo cp ${base}.${ext}  ${base}_ori.${ext}
-cp ${base}.${ext}  ${base}_ori.${ext}
-pdfcrop $1
-
-#
-mv ${base}-crop.${ext}  ${base}.${ext}
+    #
+    mv ${base}-crop.${ext}  ${base}.${ext}
+done

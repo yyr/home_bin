@@ -2,5 +2,5 @@
 # Created: Saturday, January 17 2015
 # sudo apt-get install librsvg2-bin
 for f in "$@"; do
-    rsvg-convert -f pdf -o "${f%.[^.]*}".pdf ${f}
+    rsvg-convert --keep-image-data -f png -w 300 -o "${f%.[^.]*}".png ${f}
 done
