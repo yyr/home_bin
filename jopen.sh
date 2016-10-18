@@ -4,7 +4,7 @@
 links=(http://journals.ametsoc.org/loi/bams
        http://journals.ametsoc.org/loi/atsc
        http://journals.ametsoc.org/loi/mwre
-       http://journals.ametsoc.org/toc/wefo
+       http://journals.ametsoc.org/toc/wefo/current
        http://journals.ametsoc.org/loi/clim
        http://www.sciencedirect.com/science/journal/01698095
        http://preview.onlinelibrary.wiley.com/agu/journal/10.1002/%28ISSN%292169-8996/
