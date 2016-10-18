@@ -15,11 +15,10 @@ function split-path () {
 
 for f in $@; do
     split-path $f
-
-    echo backing up... ${base}.${ext} ==>  ${base}_ori.${ext}
+    echo backing up... "${base}.${ext} ==>  ${base}_ori.${ext}"
     cp ${base}.${ext}  ${base}_ori.${ext}
-    pdftk $f cat 1east output ${base}-rot.pdf
 
+    pdftk $f cat 1east output ${base}-rot.pdf
     #
     mv ${base}-rot.${ext}  ${base}.${ext}
 done
