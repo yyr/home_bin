@@ -23,10 +23,10 @@ function convert-this-file() {	# convert to desired format
 	web)
 	    if [ -f ${base}.${ext} ]; then
 		echo "creating web thumb for ${filename}"
-		convert -thumbnail 250 "${base}.${ext}"  "${base}.websize..${ext}"
+		convert -thumbnail 500 "${base}.${ext}"  "${base}.websize..${ext}"
 		echo " created ${base}.websize.${ext}"
 	    else
-		echo "'$1' is not a valid file"    
+		echo "'$1' is not a valid file"
 	    fi
 	    ;;
 
@@ -36,21 +36,22 @@ function convert-this-file() {	# convert to desired format
 		convert -thumbnail 200 "${base}.${ext}"  "${base}.pptsize.${ext}"
 		echo " created ${base}.pptsize.${ext}"
 	    else
-		echo "'$1' is not a valid file"    
+		echo "'$1' is not a valid file"
 	    fi
 	    ;;
 	hui*)
 	    if [ -f ${base}.${ext} ]; then
 		echo "creating Thumbnail for ${filename}"
-		convert -thumbnail 500 "${base}.${ext}"  "${base}.huisa.${IMG}"
-		echo " created ${base}.huisa.${IMG}"
+		convert -thumbnail 800 "${base}.${ext}"  "${base}.800.${IMG}"
+		echo " created ${base}.800.${IMG}"
 	    else
-		echo "'$1' is not a valid file"    
+		echo "'$1' is not a valid file"
 	    fi
 	    ;;
+
 	* )
 	    usage $0
-	    exit $WRONG_OPTION
+	    # exit $WRONG_OPTION
 	    ;;
     esac
 
@@ -78,4 +79,3 @@ for file in $in_files; do
     split-path $file
     convert-this-file $arg1
 done
-
