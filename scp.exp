@@ -1,0 +1,25 @@
+#!/usr/bin/expect -f
+
+# spawn bash -c "scp emacsd.tar* nagaraju@172.16.1.14:/tmp/"
+# expect {
+#   -re ".*sword.*" {
+#     exp_send "incois\r"
+#   }
+# }
+# interact
+
+# #!/usr/bin/expect -f
+
+set timeout 20
+set files [lindex $argv 0]
+set rdir  [lindex $argv 1]
+
+spawn bash -c "scp $files nagaraju@172.16.1.14:$rdir"
+
+expect "*?assword:*"
+send -- "incois\r"
+send -- "\r"
+
+expect "*$ "
+send -- "exit\r"
+expect eof
