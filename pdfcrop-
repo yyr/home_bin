@@ -17,7 +17,6 @@ for f in $@; do
     echo backing up...
     split-path $f
     cp ${base}.${ext}  ${base}_ori.${ext}
-    cp ${base}.${ext}  ${base}_ori.${ext}
     pdfcrop $f
 
     #
