@@ -1,0 +1,13 @@
+#!/bin/bash
+
+fn=$(youtube-dl --get-filename $1)
+
+youtube-dl $1 &
+
+sleep 5
+
+if [ -f "$fn".part ]; then
+    vlc "$fn".part &
+elif [[ -f "$fn" ]]; then
+    vlc "$fn" &
+fi

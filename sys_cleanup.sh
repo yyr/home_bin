@@ -11,4 +11,4 @@ sudo apt-get autoremove
 sudo deborphan | xargs sudo apt-get -y remove --purge
 
 aptitude -F %p search '~c' | xargs sudo dpkg -P
-# ubu-disk-clean.sh ends here
+# sys_clean.sh ends here
