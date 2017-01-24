@@ -20,5 +20,6 @@ for f in $@; do
     pdfcrop $f
 
     #
+    echo "Renaming to original.."
     mv ${base}-crop.${ext}  ${base}.${ext}
 done
