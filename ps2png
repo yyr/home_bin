@@ -1,8 +1,8 @@
 #!/bin/sh
 
-for INP in $@
+for f in $@
 do
-    newname=`basename $INP .eps`
-    convert -density 150 -geometry 100% $INP $newname%02d.png
-    echo ” convert $INP to $newname.png completed”
+    base=`basename ${f} .pdf`
+    convert -density 150 -geometry 100% ${f} ${base}.png
+    echo ” convert ${f} to ${base}.png completed”
 done
