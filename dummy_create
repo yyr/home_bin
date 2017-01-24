@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+size=$1
+if [ -z ${size} ]; then
+    size=10
+    out=dummy_${size}
+    echo "Creating a dummy file \"${out}\" with ${size}kb"
+    echo "NOTE: To make a file for your desired size; give size (in kb) as first argument"
+    dd if=/dev/zero of=${out} bs=$(($size * 1024))_size count=1
+else
+    out=dummy_${size}
+    echo "Creating a dummy file \"${out}\" with ${size}kb"
+    dd if=/dev/zero of=${out} bs=$((${size} * 1024)) count=1
+fi
