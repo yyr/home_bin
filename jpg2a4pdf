@@ -1,10 +1,15 @@
 #!/bin/bash
 # -*- mode: sh; -*-
+# convert jpg to pdf with proper MARGINS,
+# See jpg2a4pdf_nm for no margins.
 
 for filename in $@; do
     base="${filename%.[^.]*}"
     ext="${filename:${#base} + 1}"
 
-    convert ${filename}  -resize 1240x1750 -compose Copy -gravity \
-            center -extent 1240x1750 -units PixelsPerInch -density 300 ${base}.pdf
+    convert ${filename}  -resize 1055x1750 -compose \
+            Copy -gravity \
+            center -extent 1240x1750 \
+            -units PixelsPerInch -density 600 \
+            ${base}.pdf
 done
