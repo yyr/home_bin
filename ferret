@@ -1,5 +1,5 @@
 # 5.53 for rh71
-source ~/local/ferret_paths
+source ~/local/ferret/ferret_paths
 
 # Faddpath $HOME/ferret/gridlines
 exec /home/yagnesh/local/ferret/bin/ferret $*
