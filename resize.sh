@@ -1,20 +1,11 @@
 #!/bin/bash
 #any image file will be converted to thumb nail size
 
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/blib.sh
+
 function usage() {		# tell the usage
         echo USAGE: "$1 <web/ppt> <file name> "
-}
-
-function split-path () {	# split the path of a file
-    fullpath=$@
-    filename="${fullpath##*/}"                      # Strip longest match of */ from start
-    dir="${fullpath:0:${#fullpath} - ${#filename}}" # Substring from 0 thru pos of filename
-    base="${filename%.[^.]*}"                       # Strip shortest match of . plus at least one non-dot char from end
-    ext="${filename:${#base} + 1}"                  # Substring from len of base thru end
-    if [[ -z "$base" && -n "$ext" ]]; then          # If we have an extension and no base, it's really the base
-        base=".$ext"
-        ext=""
-    fi
 }
 
 function convert-this-file() {	# convert to desired format
@@ -23,7 +14,7 @@ function convert-this-file() {	# convert to desired format
 	web)
 	    if [ -f ${base}.${ext} ]; then
 		echo "creating web thumb for ${filename}"
-		convert -thumbnail 500 "${base}.${ext}"  "${base}.websize..${ext}"
+		convert -thumbnail 350 "${base}.${ext}"  "${base}.websize.${ext}"
 		echo " created ${base}.websize.${ext}"
 	    else
 		echo "'$1' is not a valid file"
