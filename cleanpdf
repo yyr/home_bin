@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+THIS_FILE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source $THIS_FILE_DIR/blib.sh
+
+for f in $@; do
+    split-path $f
+    cp ${base}.${ext}  ${base}_ori.${ext}
+
+    pdf90 -q $f
+    mv ${base}-rotated90.${ext}  ${base}.${ext}
+
+    pdfcrop --margins 10 $f &> /dev/null
+    mv ${base}-crop.${ext}  ${base}.${ext}
+done
