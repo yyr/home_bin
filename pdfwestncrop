@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# pdfcrop creates new file without replacing the original. this one replaces
+# the priginl
+
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/blib.sh
+
+for f in $@; do
+    split-path $f
+
+    pdf90 $f
+    mv ${base}-rotated90.${ext}  ${base}.${ext}
+
+    pdfcrop $f
+    mv ${base}-crop.${ext}  ${base}.${ext}
+done
