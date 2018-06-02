@@ -9,7 +9,7 @@ for f in $@; do
     orifile=${base}_ori.${ext}
 
     if [ -f ${orifile} ]; then
-        echo mv ${base}_ori.${ext} ${base}.${ext}
+        mv ${base}_ori.${ext} ${base}.${ext}
     else
         echo "no original file $orifile is not available"
     fi
