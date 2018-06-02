@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 # pdfcrop generates another file without replacing. this just replaces the original.
 
-function split-path () {
-    fullpath=$@
-    filename="${fullpath##*/}"                      # Strip longest match of */ from start
-    dir="${fullpath:0:${#fullpath} - ${#filename}}" # Substring from 0 thru pos of filename
-    base="${filename%.[^.]*}"                       # Strip shortest match of . plus at least one non-dot char from end
-    ext="${filename:${#base} + 1}"                  # Substring from len of base thru end
-    if [[ -z "$base" && -n "$ext" ]]; then          # If we have an extension and no base, it's really the base
-        base=".$ext"
-        ext=""
-    fi
-}
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/blib.sh
 
 for f in $@; do
     split-path $f
-    echo restoring up... "${base}.${ext} ==>  ${base%_ori*}.${ext}"
-    mv ${base}.${ext}  ${base%_ori*}.${ext}
+    orifile=${base}_ori.${ext}
+
+    if [ -f ${orifile} ]; then
+        echo mv ${base}_ori.${ext} ${base}.${ext}
+    else
+        echo "no original file $orifile is not available"
+    fi
+
 done
